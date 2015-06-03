@@ -8,7 +8,7 @@ TreasureData.py should be run with the following arguments in the order listed b
 4. minimum timestamp in unix timestamp - OPTIONAL
 5. maximum timestamp in unix timestamp - OPTIONAL
 6. query engine: 'hive' or 'presto' - OPTIONAL
-7. output format: csv or tabular - REQUIRED
+7. output format: csv or tabular - OPTIONAL
 
 ### **Example command line for tabular output**:
 ```python TreasureData.py sample_datasets www_access host,path 1412121600 1423232700 presto tabular```
