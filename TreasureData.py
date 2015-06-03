@@ -11,6 +11,7 @@ import csv
 apikey = os.getenv("TD_API_KEY")
 db_name = str(None)
 query_str = str(None)
+output_format = str(None)
 
 #__Assign query elements from command line arguments__
        
@@ -38,7 +39,9 @@ def executeQuery():
        
 	if len(sys.argv) > 7:
             output_format = sys.argv[7]
-            print 'OutputFormat: {0}'.format(output_format)
+	    print 'OutputFormat: {0}'.format(output_format)
+	else:
+	    output_format = None
 
 #__Construct query__
     	query_str = "SELECT "+column_list+" from "+table_name+" WHERE TD_TIME_RANGE(time,"+min_time+","+max_time+")"
@@ -48,7 +51,7 @@ def executeQuery():
     	with tdclient.Client(apikey) as client:
     	    job = client.query(db_name, query_str, result_url=None, priority=None, retry_limit=None, type=query_engine)
     	    job.wait()
-	    if output_format == 'tabular':
+	    if output_format == 'tabular' or output_format == None:
 		headers = column_list.split(",")
 		print tabulate(job.result(),headers,tablefmt="grid")
 	    elif output_format == 'csv':
